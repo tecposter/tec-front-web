@@ -8,9 +8,9 @@ const cmd = setting().cmd;
 
 export default async () => {
     ctrl_panel_init()
-        .register(cmd.article.create, () => createArticle());
+        .register(cmd.post.create, () => createPost());
 
-    webClient.send(cmd.article.list);
+    webClient.send(cmd.post.list);
     return homePage;
     //console.log(route);
     //const homePage = new HomePage();
@@ -18,9 +18,17 @@ export default async () => {
     //return new HomePage();
 };
 
-const createArticle = () => {
+webClient.receive(cmd.post.create, (data) => {
+    if (!data || !data.pid) {
+        throw new Error('cannot find pid');
+    }
+
     browser_router().navigate(
-        'article.commit',
-        {articleId: randomBs58(), commitId: randomBs58()}
+        'post.edit',
+        {pid: data.pid}
     );
+});
+
+const createPost = () => {
+    webClient.send(cmd.post.create, {});
 };

@@ -29,23 +29,23 @@ export const cmdSetting = {
                 desc: 'Logout'
             },
         },
-        article: {
+        post: {
             commit: {
-                name: 'article.commit',
-                desc: 'Submit a commit of article',
+                name: 'post.commit',
+                desc: 'Submit a commit of post',
                 shortKeys: 'ctrl-s',
             },
             publish: {
-                name: 'article.publish',
-                desc: 'Publish the commit of article'
+                name: 'post.publish',
+                desc: 'Publish the commit of post'
             },
             create: {
-                name: 'article.create',
-                desc: 'Creae a article'
+                name: 'post.create',
+                desc: 'Creae a post'
             },
             list: {
-                name: 'article.list',
-                desc: 'List articles'
+                name: 'post.list',
+                desc: 'List posts'
             }
         }
     }

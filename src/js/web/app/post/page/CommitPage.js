@@ -22,21 +22,21 @@ export class CommitPage extends View {
         return this;
     }
 
-    getArticleId() {
-        return this.data.articleId;
+    getPid() {
+        return this.data.pid;
     }
 
-    setArticleId(articleId) {
-        this.data.articleId = articleId;
+    setPid(pid) {
+        this.data.pid = pid;
         return this;
     }
 
-    getCommitId() {
-        return this.data.commitId;
+    getCid() {
+        return this.data.cid;
     }
 
-    setCommitId(commitId) {
-        this.data.commitId = commitId;
+    setCid(cid) {
+        this.data.cid = cid;
         return this;
     }
 

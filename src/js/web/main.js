@@ -6,13 +6,14 @@ import {cmdSetting} from './../../../setting/setting.cmd';
 
 bootstrap(settingObj, localSetting, cmdSetting);
 
+//.add('/post/commit/{postId:[0-9a-z-]+}/{commitId:[0-9a-z-]+}', 'post.commit', 'post/commit');
 const browserRouter = browser_router();
 browserRouter
     .add('/', 'home', 'landing/home')
     .add('/logout', 'user.logout', 'user/logout')
     .add('/login', 'user.login', 'user/login')
     .add('/reg', 'user.reg', 'user/reg')
-    .add('/article/commit/{articleId:[0-9a-z-]+}/{commitId:[0-9a-z-]+}', 'article.commit', 'article/commit');
+    .add('/pid/{pid:[0-9a-z-]+}', 'post.edit', 'post/edit');
 
 
 const mainElem = oneElem('.page .main');

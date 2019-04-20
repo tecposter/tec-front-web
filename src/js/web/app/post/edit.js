@@ -9,43 +9,43 @@ const publishPop = ctrl_panel().createPop(publishForm);
 
 const cmd = setting().cmd;
 const webClient = web_client();
-webClient.receive(cmd.article.publish, (data) => {
+webClient.receive(cmd.post.publish, (data) => {
     console.log(data)
 });
 
 publishForm.onSubmit(async (slug, isPublic) => {
     const content = commitPage.getContent();
-    webClient.send(cmd.article.publish, {
+    webClient.send(cmd.post.publish, {
         slug,
         isPublic,
         content,
-        articleId: commitPage.data.articleId,
-        commitId: commitPage.data.commitId
+        pid: commitPage.data.pid,
+        cid: commitPage.data.cid
     });
 });
 
-const articleCommit = () => {
-    webClient.send(cmd.article.commit, {
+const postCommit = () => {
+    webClient.send(cmd.post.commit, {
         userId: web_cache().get('userId'),
         content: commitPage.getContent(),
-        articleId: commitPage.getArticleId(),
-        commitId: commitPage.getCommitId()
+        pid: commitPage.getPid(),
+        cid: commitPage.getCid()
     });
 };
 
 export default async (route) => {
     ctrl_panel_init()
-        .register(cmd.article.publish, () => publishPop.show())
-        .register(cmd.article.commit, () => articleCommit());
+        .register(cmd.post.publish, () => publishPop.show())
+        .register(cmd.post.commit, () => postCommit());
 
     commitPage
-        .setArticleId(route.params.articleId)
-        .setCommitId(route.params.commitId)
+        .setPid(route.params.pid)
+        .setCid(route.params.cid)
         .setContent('');
     /*
     commitPage.update({
-        articleId: route.params.articleId,
-        commitId: route.params.commitId,
+        pid: route.params.pid,
+        cid: route.params.cid,
         content: ''
     });
     */
