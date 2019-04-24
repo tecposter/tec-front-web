@@ -1,10 +1,10 @@
 import {View} from 'gap/View';
 import {Editor} from 'markdown/Editor';
 
-export class CommitPage extends View {
+export class EditPage extends View {
     template() {
         return this.html`
-        <div class="save-commit">
+        <div class="post-edit">
             ${this.getEditor().getCtnElem()}
         </div>
         `;

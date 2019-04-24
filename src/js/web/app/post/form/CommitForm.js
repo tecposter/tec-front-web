@@ -5,14 +5,14 @@ const Event = {
     show: 'show'
 };
 
-export class PublishForm extends View {
+export class CommitForm extends View {
     template() {
         return this.html`
         <form 
             on-submit=${() => this.triggerSubmit()}
             action="javascript:;" method="post">
         <div class="form-content">
-            <h2 class="title">Publish</h2>
+            <h2 class="title">Commit</h2>
             <p>
                 title:
                 <strong>$${'title'}</strong>

@@ -32,16 +32,20 @@ export const cmdSetting = {
         post: {
             commit: {
                 name: 'post.commit',
-                desc: 'Submit a commit of post',
+                desc: 'Commit the post',
                 shortKeys: 'ctrl-s',
             },
-            publish: {
-                name: 'post.publish',
-                desc: 'Publish the commit of post'
+            saveDraft: {
+                name: 'post.saveDraft',
+                desc: 'Save the Draft'
             },
             create: {
                 name: 'post.create',
                 desc: 'Creae a post'
+            },
+            edit: {
+                name: 'post.edit',
+                desc: 'Edit the post'
             },
             list: {
                 name: 'post.list',

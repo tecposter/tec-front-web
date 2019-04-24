@@ -1,49 +1,49 @@
-import {CommitPage} from './page/CommitPage';
-import {PublishForm} from './form/PublishForm';
+import {EditPage} from './page/EditPage';
+import {CommitForm} from './form/CommitForm';
 import {web_client, ctrl_panel_init, ctrl_panel, web_cache, setting} from 'global';
 
-const commitPage = new CommitPage();
-const publishForm = new PublishForm();
-const publishPop = ctrl_panel().createPop(publishForm);
+const editPage = new EditPage();
+const commitForm = new CommitForm();
+const commitPop = ctrl_panel().createPop(commitForm);
 
 
 const cmd = setting().cmd;
 const webClient = web_client();
-webClient.receive(cmd.post.publish, (data) => {
+webClient.receive(cmd.post.commit, (data) => {
     console.log(data)
 });
 
-publishForm.onSubmit(async (slug, isPublic) => {
-    const content = commitPage.getContent();
-    webClient.send(cmd.post.publish, {
+commitForm.onSubmit(async (slug, isPublic) => {
+    const content = editPage.getContent();
+    webClient.send(cmd.post.commit, {
         slug,
         isPublic,
         content,
-        pid: commitPage.data.pid,
-        cid: commitPage.data.cid
+        pid: editPage.data.pid,
+        cid: editPage.data.cid
     });
 });
 
-const postCommit = () => {
-    webClient.send(cmd.post.commit, {
+const savedraft = () => {
+    webClient.send(cmd.post.saveDraft, {
         userId: web_cache().get('userId'),
-        content: commitPage.getContent(),
-        pid: commitPage.getPid(),
-        cid: commitPage.getCid()
+        content: editPage.getContent(),
+        pid: editPage.getPid(),
+        cid: editPage.getCid()
     });
 };
 
 export default async (route) => {
     ctrl_panel_init()
-        .register(cmd.post.publish, () => publishPop.show())
-        .register(cmd.post.commit, () => postCommit());
+        .register(cmd.post.saveDraft, () => savedraft())
+        .register(cmd.post.commit, () => commitPop.show());
 
-    commitPage
+    editPage
         .setPid(route.params.pid)
         .setCid(route.params.cid)
         .setContent('');
     /*
-    commitPage.update({
+    editPage.update({
         pid: route.params.pid,
         cid: route.params.cid,
         content: ''
@@ -52,5 +52,5 @@ export default async (route) => {
 
     // todo reset ctrl_panel
 
-    return commitPage;
+    return editPage;
 };

@@ -13,7 +13,7 @@ browserRouter
     .add('/logout', 'user.logout', 'user/logout')
     .add('/login', 'user.login', 'user/login')
     .add('/reg', 'user.reg', 'user/reg')
-    .add('/pid/{pid:[0-9a-z-]+}', 'post.edit', 'post/edit');
+    .add('/edit/{pid:[0-9a-z-]+}', 'post.edit', 'post/edit');
 
 
 const mainElem = oneElem('.page .main');
