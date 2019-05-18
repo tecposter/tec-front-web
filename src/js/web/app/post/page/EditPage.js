@@ -13,13 +13,33 @@ export class EditPage extends View {
     startup() {
     }
 
+    async asGetCodeModel() {
+        return await this.getEditor().asGetCodeModel();
+    }
+
     getContent() {
         return this.getEditor().getContent();
     }
 
+    saved() {
+        const editor = this.getEditor();
+        editor.saved();
+        document.title = editor.getTitle();
+    }
+
     setContent(content) {
-        this.getEditor().setContent(content);
+        this._prevContent = content;
+        const editor = this.getEditor();
+        editor.setContent(content);
+        // todo
+        //setTimeout(() => editor.saved(), 100);
+        //document.title = editor.getTitle();
+
         return this;
+    }
+
+    getPrevContent() {
+        return this._prevContent;
     }
 
     getPid() {
@@ -31,6 +51,16 @@ export class EditPage extends View {
         return this;
     }
 
+    getPrev() {
+        return this.data.prev;
+    }
+
+    setPrev(prev) {
+        this.data.prev = prev;
+        return this;
+    }
+
+    /*
     getCid() {
         return this.data.cid;
     }
@@ -39,6 +69,7 @@ export class EditPage extends View {
         this.data.cid = cid;
         return this;
     }
+    */
 
     getEditor() {
         if (this._editor) {

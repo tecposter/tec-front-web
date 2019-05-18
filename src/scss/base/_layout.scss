@@ -6,8 +6,10 @@ $page-header-height: 4rem;
 $page-header-margin: 0 0 1rem;
 
 .ctn {
+    height: 100%;
     margin: $ctn-margin;
     max-width: $ctn-max-width;
+    overflow: auto;
     padding: $ctn-padding;
 }
 

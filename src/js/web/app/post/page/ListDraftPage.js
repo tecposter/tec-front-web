@@ -1,25 +1,25 @@
 import {View} from 'gap/View';
 
 const Event = {
-    postShow: 'postShow'
+    edit: 'edit'
 };
 
-export class HomePage extends View {
+export class ListDraftPage extends View {
     template() {
         return this.html`
         <div class="home ctn">
             <div
                 class="list article-list"
                 arr="list"
-                item-as="post"
-                item-key=${post => post.pid}
+                item-as="draft"
+                item-key=${draft => draft.pid}
             >
                 ${(key) => this.html`
                     <div class="item">
                         <div class="article-title">
                             <a
-                                on-click=${() => this.postShow(this.data.list.get(key))}
-                                watch="post.content"
+                                on-click=${() => this.gotoEdit(this.data.list.get(key))}
+                                watch="draft.content"
                                 href="javascript:;">
                                 ${() => this.extractTitle(this.data.list.get(key))}           
                             </a>
@@ -31,16 +31,15 @@ export class HomePage extends View {
         `;
     }
 
-    onPostShow(fun) {
-        this.on(Event.postShow, fun);
+    onEdit(fun) {
+        this.on(Event.edit, fun);
     }
 
-    postShow(post) {
-        this.trigger(Event.postShow, post.cid);
+    gotoEdit(draft) {
+        this.trigger(Event.edit, draft.pid);
     }
 
-    extractTitle(post) {
-        return post.title || post.content.substr(0, 100);
-        //return post.content.substr(0, 100);
+    extractTitle(draft) {
+        return draft.content.substr(0, 100);
     }
 }

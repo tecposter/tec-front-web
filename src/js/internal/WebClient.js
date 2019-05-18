@@ -1,5 +1,10 @@
 import {GapEvent} from 'gap/GapEvent';
 
+const Status = {
+    ok: 'ok',
+    err: 'err'
+};
+
 export class WebClient {
     constructor(apiUrl) {
         this.apiUrl = apiUrl;
@@ -18,7 +23,16 @@ export class WebClient {
 
     handleMessage(evt) {
         const res = JSON.parse(evt.data);
-        this.event.trigger(res.cmd, res.data);
+        if (res.status === Status.ok) {
+            this.event.trigger(res.cmd, res.data);
+            return;
+        }
+
+        if (res.status === Status.err) {
+            throw new Error(res.err);
+        }
+
+        throw new Error('unknow error');
     }
 
     close() {
